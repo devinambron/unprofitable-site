@@ -21,24 +21,34 @@ document.addEventListener('DOMContentLoaded', function() {
     const closeIcon = document.getElementById('close-icon');
     
     if (mobileMenuToggle && mobileMenu && menuIcon && closeIcon) {
+        console.log('Mobile menu elements found, initializing...');
+        
+        // Make sure icons are in correct initial state
+        menuIcon.classList.remove('hidden');
+        closeIcon.classList.add('hidden');
+        
         const toggleMobileMenu = () => {
             const isMenuVisible = !mobileMenu.classList.contains('hidden');
+            console.log('Toggle mobile menu, current visibility:', isMenuVisible);
             
             if (isMenuVisible) {
+                // Hide menu with Tailwind
                 mobileMenu.classList.add('hidden');
                 menuIcon.classList.remove('hidden');
                 closeIcon.classList.add('hidden');
+                console.log('Menu hidden');
             } else {
+                // Show menu with Tailwind
                 mobileMenu.classList.remove('hidden');
                 menuIcon.classList.add('hidden');
                 closeIcon.classList.remove('hidden');
+                console.log('Menu shown');
             }
-            
-            // Prevent body scroll when menu is open
-            document.body.style.overflow = isMenuVisible ? '' : 'hidden';
         };
 
         mobileMenuToggle.addEventListener('click', (e) => {
+            console.log('Mobile menu button clicked');
+            e.preventDefault(); // Prevent default behavior
             e.stopPropagation();
             toggleMobileMenu();
         });
@@ -72,6 +82,12 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             
             const targetId = this.getAttribute('href');
+            
+            // Skip empty hrefs or just '#'
+            if (!targetId || targetId === '#') {
+                return;
+            }
+            
             const targetElement = document.querySelector(targetId);
             
             if (targetElement) {

@@ -22,7 +22,7 @@
     <script src="script.js" defer></script>
 </head>
 <body class="bg-black text-gray-400 font-mono leading-relaxed">
-    <div class="announcement-bar">
+    <div class="announcement-bar sticky top-0 z-50">
         <div class="container mx-auto px-4">
             <div class="announcement-content">
                 <span>We are now accepting <button id="apply-button" class="announcement-link">submissions</button> for new board members</span>
@@ -31,13 +31,13 @@
     </div>
 
     <div class="container mx-auto px-4 py-8 max-w-5xl">
-        <header class="sticky top-0 bg-black bg-opacity-95 z-50 py-4 backdrop-blur-sm shadow-lg shadow-black/50">
+        <header class="sticky top-[2.5rem] bg-black bg-opacity-95 z-40 py-4 backdrop-blur-sm shadow-lg shadow-black/50">
             <nav class="flex justify-between items-center">
                 <div>
                     <a href="#" class="text-2xl font-bold tracking-widest">UNPROFITABLE</a>
                 </div>
                 <div class="block lg:hidden">
-                    <button id="mobile-menu-toggle" class="mobile-menu-button p-2 focus:outline-none">
+                    <button id="mobile-menu-toggle" class="mobile-menu-button p-2 focus:outline-none relative z-50">
                         <svg id="menu-icon" class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                         </svg>
@@ -53,15 +53,19 @@
                     <li><a href="#contact" class="hover:text-white transition-colors">Contact</a></li>
                 </ul>
             </nav>
-            <div id="mobile-menu" class="hidden lg:hidden mt-4 py-2 border-t border-gray-800">
-                <ul class="flex flex-col">
+        </header>
+        
+        <!-- Mobile menu (moved outside header) -->
+        <div class="bg-black w-full fixed top-[calc(2.5rem+64px)] left-0 z-30 shadow-lg shadow-black/50">
+            <div id="mobile-menu" class="hidden lg:hidden border-t border-gray-800 max-w-5xl mx-auto transition-all duration-300 ease-in-out">
+                <ul class="flex flex-col p-4">
                     <li><a href="#mission" class="block py-3 px-2 hover:bg-gray-900 hover:text-white transition-colors rounded">Mission</a></li>
                     <li><a href="#portfolio" class="block py-3 px-2 hover:bg-gray-900 hover:text-white transition-colors rounded">Portfolio</a></li>
                     <li><a href="#advisory" class="block py-3 px-2 hover:bg-gray-900 hover:text-white transition-colors rounded">Advisory</a></li>
                     <li><a href="#contact" class="block py-3 px-2 hover:bg-gray-900 hover:text-white transition-colors rounded">Contact</a></li>
                 </ul>
             </div>
-        </header>
+        </div>
 
         <main>
             <section class="py-20 text-center relative">
