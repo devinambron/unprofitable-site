@@ -109,6 +109,7 @@ body {
     background-color: rgba(0, 0, 0, 0.95);
     backdrop-filter: blur(8px);
     border-top: 1px solid #333;
+    z-index: 50;
   }
 
   /* Mobile menu button styles */
@@ -120,6 +121,7 @@ body {
     height: 40px;
     width: 40px;
     cursor: pointer;
+    z-index: 51;
   }
 
   /* Menu icon styles */
@@ -135,6 +137,7 @@ body {
   header {
     background-color: rgba(0, 0, 0, 0.95);
     backdrop-filter: blur(8px);
+    z-index: 45;
   }
 
   /* Announcement bar styles */
@@ -144,6 +147,7 @@ body {
     padding: 0.5rem 0;
     font-size: 0.875rem;
     letter-spacing: 0.025em;
+    z-index: 40;
   }
 
   .announcement-content {

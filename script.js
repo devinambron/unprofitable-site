@@ -37,12 +37,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 menuIcon.classList.remove('hidden');
                 closeIcon.classList.add('hidden');
                 console.log('Menu hidden');
+                
+                // Reset overflow
+                document.body.style.overflow = '';
             } else {
                 // Show menu with Tailwind
                 mobileMenu.classList.remove('hidden');
                 menuIcon.classList.add('hidden');
                 closeIcon.classList.remove('hidden');
                 console.log('Menu shown');
+                
+                // Prevent scrolling when menu is open
+                document.body.style.overflow = 'hidden';
             }
         };
 
