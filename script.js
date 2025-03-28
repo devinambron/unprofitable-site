@@ -81,6 +81,76 @@ document.addEventListener('DOMContentLoaded', function() {
     if (yearElement) {
         yearElement.textContent = new Date().getFullYear();
     }
+
+    // Modal functionality
+    const applyButton = document.getElementById('apply-button');
+    const modal = document.getElementById('apply-modal');
+    const closeModal = document.getElementById('close-modal');
+    const applicationForm = document.getElementById('application-form');
+    const formSuccess = document.querySelector('.form-success');
+    const formError = document.querySelector('.form-error');
+
+    if (applyButton && modal && closeModal) {
+        // Open modal
+        applyButton.addEventListener('click', () => {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        // Close modal function
+        const closeModalFunction = () => {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+            formSuccess.style.display = 'none';
+            formError.style.display = 'none';
+            // Reset form when modal is closed
+            if (applicationForm) {
+                applicationForm.reset();
+            }
+        };
+
+        closeModal.addEventListener('click', closeModalFunction);
+
+        // Close modal when clicking outside
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModalFunction();
+            }
+        });
+
+        // Handle form submission
+        if (applicationForm) {
+            applicationForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const submitButton = applicationForm.querySelector('button[type="submit"]');
+                submitButton.disabled = true;
+                
+                try {
+                    const response = await fetch(applicationForm.action, {
+                        method: 'POST',
+                        body: new FormData(applicationForm),
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+
+                    if (response.ok) {
+                        formSuccess.style.display = 'block';
+                        formError.style.display = 'none';
+                        // Close modal after showing success message briefly
+                        setTimeout(closeModalFunction, 1500);
+                    } else {
+                        throw new Error('Form submission failed');
+                    }
+                } catch (error) {
+                    formError.style.display = 'block';
+                    formSuccess.style.display = 'none';
+                } finally {
+                    submitButton.disabled = false;
+                }
+            });
+        }
+    }
 });
 
 // Function to create and animate the trading chart

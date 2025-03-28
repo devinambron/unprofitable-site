@@ -13,6 +13,14 @@
     <script src="script.js" defer></script>
 </head>
 <body class="bg-black text-gray-400 font-mono leading-relaxed">
+    <div class="announcement-bar">
+        <div class="container mx-auto px-4">
+            <div class="announcement-content">
+                <span>We are now accepting <button id="apply-button" class="announcement-link">submissions</button> for new board members</span>
+            </div>
+        </div>
+    </div>
+
     <div class="container mx-auto px-4 py-8 max-w-5xl">
         <header class="sticky top-0 bg-black bg-opacity-95 z-50 py-4 backdrop-blur-sm shadow-lg shadow-black/50">
             <nav class="flex justify-between items-center">
@@ -183,5 +191,32 @@
             </div>
         </footer>
     </div>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="apply-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="close-modal">&times;</button>
+            <h2 class="text-2xl font-bold mb-6 text-white">Apply for Board Membership</h2>
+            <form id="application-form" action="https://formspree.io/f/myzedwjo" method="POST">
+                <div class="mb-4">
+                    <label for="name" class="block mb-2">Name</label>
+                    <input type="text" id="name" name="name" class="form-input" required>
+                </div>
+                <div class="mb-4">
+                    <label for="email" class="block mb-2">Email</label>
+                    <input type="email" id="email" name="email" class="form-input" required>
+                </div>
+                <div class="mb-4">
+                    <label for="unprofitable-venture" class="block mb-2">What is the least profitable thing you have ever done?</label>
+                    <textarea id="unprofitable-venture" name="unprofitable-venture" class="form-input" rows="4" required placeholder="Tell us about your most spectacular financial failure..."></textarea>
+                </div>
+                <button type="submit" class="form-submit">Submit Application</button>
+                <div class="form-success">Thank you for your application! We'll be in touch soon.</div>
+                <div class="form-error">There was an error submitting your application. Please try again.</div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js" defer></script>
 </body>
 </html>
