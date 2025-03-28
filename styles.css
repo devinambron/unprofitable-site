@@ -47,26 +47,32 @@ body {
 
   /* Trading chart animation */
   #trading-chart {
-    opacity: 0.2;
-    min-height: 300px;
+    opacity: 0.8;
+    min-height: 400px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
   }
 
   .chart-line {
     fill: none;
     stroke: #ff0000;
-    stroke-width: 2;
+    stroke-width: 8;
     stroke-linecap: round;
-    filter: drop-shadow(0 0 8px rgba(255, 0, 0, 0.7));
+    stroke-linejoin: round;
+    filter: drop-shadow(0 0 15px rgba(255, 0, 0, 0.9));
   }
 
   .chart-dot {
-    fill: #ff0000;
-    filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.9));
+    fill: #ff3333;
+    filter: drop-shadow(0 0 15px rgba(255, 0, 0, 1));
   }
 
   @keyframes drawLine {
     from {
-      stroke-dashoffset: 1000;
+      stroke-dashoffset: 2000;
     }
     to {
       stroke-dashoffset: 0;
@@ -75,25 +81,76 @@ body {
 
   @keyframes pulsate {
     0% {
-      opacity: 0.7;
-      filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.7));
+      opacity: 0.8;
+      filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.8));
     }
     50% {
       opacity: 1;
-      filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.9));
+      filter: drop-shadow(0 0 25px rgba(255, 0, 0, 1));
     }
     100% {
-      opacity: 0.7;
-      filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.7));
+      opacity: 0.8;
+      filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.8));
     }
   }
 
   .animate-drawLine {
-    stroke-dasharray: 1000;
-    stroke-dashoffset: 1000;
-    animation: drawLine 10s forwards ease-in-out;
+    stroke-dasharray: 2000;
+    stroke-dashoffset: 2000;
+    animation: drawLine 5s forwards ease-out;
   }
 
   .animate-pulsate {
-    animation: pulsate 2s infinite ease-in-out;
+    animation: pulsate 3s infinite ease-in-out;
+  }
+
+  /* Mobile menu styles */
+  #mobile-menu {
+    transition: all 0.3s ease;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+  }
+
+  #mobile-menu.hidden {
+    max-height: 0;
+    opacity: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-top: 0;
+    margin-top: 0;
+  }
+
+  #mobile-menu:not(.hidden) {
+    max-height: 300px;
+    opacity: 1;
+    border-top-width: 1px;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .mobile-menu-button {
+    transition: transform 0.2s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .mobile-menu-button:hover {
+    transform: scale(1.1);
+  }
+
+  .mobile-menu-button:active {
+    transform: scale(0.95);
+  }
+
+  /* Transitions for menu icons */
+  #menu-icon, #close-icon {
+    transition: opacity 0.3s ease;
+    position: absolute;
+  }
+
+  #menu-icon.hidden, #close-icon.hidden {
+    opacity: 0;
   }
