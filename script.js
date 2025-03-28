@@ -21,20 +21,41 @@ document.addEventListener('DOMContentLoaded', function() {
     const closeIcon = document.getElementById('close-icon');
     
     if (mobileMenuToggle && mobileMenu && menuIcon && closeIcon) {
-        mobileMenuToggle.addEventListener('click', function() {
+        const toggleMobileMenu = () => {
+            const isMenuVisible = !mobileMenu.classList.contains('hidden');
             mobileMenu.classList.toggle('hidden');
             menuIcon.classList.toggle('hidden');
             closeIcon.classList.toggle('hidden');
+            
+            // Prevent body scroll when menu is open
+            document.body.style.overflow = isMenuVisible ? '' : 'hidden';
+        };
+
+        mobileMenuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleMobileMenu();
         });
         
         // Close mobile menu when a link is clicked
         const mobileMenuLinks = mobileMenu.querySelectorAll('a');
         mobileMenuLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                mobileMenu.classList.add('hidden');
-                menuIcon.classList.remove('hidden');
-                closeIcon.classList.add('hidden');
+            link.addEventListener('click', function(e) {
+                e.stopPropagation();
+                toggleMobileMenu();
             });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            const isMenuVisible = !mobileMenu.classList.contains('hidden');
+            if (isMenuVisible && !mobileMenu.contains(e.target) && e.target !== mobileMenuToggle) {
+                toggleMobileMenu();
+            }
+        });
+
+        // Prevent menu close when clicking inside menu
+        mobileMenu.addEventListener('click', (e) => {
+            e.stopPropagation();
         });
     }
     
