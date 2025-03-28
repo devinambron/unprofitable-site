@@ -23,9 +23,16 @@ document.addEventListener('DOMContentLoaded', function() {
     if (mobileMenuToggle && mobileMenu && menuIcon && closeIcon) {
         const toggleMobileMenu = () => {
             const isMenuVisible = !mobileMenu.classList.contains('hidden');
-            mobileMenu.classList.toggle('hidden');
-            menuIcon.classList.toggle('hidden');
-            closeIcon.classList.toggle('hidden');
+            
+            if (isMenuVisible) {
+                mobileMenu.classList.add('hidden');
+                menuIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+            } else {
+                mobileMenu.classList.remove('hidden');
+                menuIcon.classList.add('hidden');
+                closeIcon.classList.remove('hidden');
+            }
             
             // Prevent body scroll when menu is open
             document.body.style.overflow = isMenuVisible ? '' : 'hidden';
