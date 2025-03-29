@@ -141,76 +141,100 @@ document.addEventListener('DOMContentLoaded', function() {
     const formSuccess = document.querySelector('.form-success');
     const formError = document.querySelector('.form-error');
 
-    if ((applyButton || boardApplyButton) && modal && closeModal) {
-        // Open modal
-        if (applyButton) {
-            applyButton.addEventListener('click', () => {
-                modal.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            });
-        }
-        
-        // Open modal from board apply button
-        if (boardApplyButton) {
-            boardApplyButton.addEventListener('click', () => {
-                modal.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            });
-        }
-
-        // Close modal function
-        const closeModalFunction = () => {
-            modal.classList.remove('active');
-            document.body.style.overflow = '';
-            formSuccess.style.display = 'none';
-            formError.style.display = 'none';
-            // Reset form when modal is closed
-            if (applicationForm) {
-                applicationForm.reset();
+    // Function to initialize modal buttons
+    const initModalButtons = () => {
+        // Ensure we have all required elements for modal functionality
+        if (modal && closeModal) {
+            // Apply button handler (top announcement bar)
+            if (applyButton) {
+                applyButton.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
             }
-        };
-
-        closeModal.addEventListener('click', closeModalFunction);
-
-        // Close modal when clicking outside
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                closeModalFunction();
+            
+            // Board apply button handler (new section)
+            if (boardApplyButton) {
+                boardApplyButton.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
             }
-        });
 
-        // Handle form submission
-        if (applicationForm) {
-            applicationForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const submitButton = applicationForm.querySelector('button[type="submit"]');
-                submitButton.disabled = true;
-                
-                try {
-                    const response = await fetch(applicationForm.action, {
-                        method: 'POST',
-                        body: new FormData(applicationForm),
-                        headers: {
-                            'Accept': 'application/json'
-                        }
-                    });
+            // Close modal function
+            const closeModalFunction = () => {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+                if (formSuccess) formSuccess.style.display = 'none';
+                if (formError) formError.style.display = 'none';
+                // Reset form when modal is closed
+                if (applicationForm) {
+                    applicationForm.reset();
+                }
+            };
 
-                    if (response.ok) {
-                        formSuccess.style.display = 'block';
-                        formError.style.display = 'none';
-                        // Close modal after showing success message briefly
-                        setTimeout(closeModalFunction, 1500);
-                    } else {
-                        throw new Error('Form submission failed');
-                    }
-                } catch (error) {
-                    formError.style.display = 'block';
-                    formSuccess.style.display = 'none';
-                } finally {
-                    submitButton.disabled = false;
+            closeModal.addEventListener('click', closeModalFunction);
+
+            // Close modal when clicking outside
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModalFunction();
                 }
             });
+
+            // Handle form submission
+            if (applicationForm) {
+                applicationForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const submitButton = applicationForm.querySelector('button[type="submit"]');
+                    submitButton.disabled = true;
+                    
+                    try {
+                        const response = await fetch(applicationForm.action, {
+                            method: 'POST',
+                            body: new FormData(applicationForm),
+                            headers: {
+                                'Accept': 'application/json'
+                            }
+                        });
+
+                        if (response.ok) {
+                            if (formSuccess) formSuccess.style.display = 'block';
+                            if (formError) formError.style.display = 'none';
+                            // Close modal after showing success message briefly
+                            setTimeout(closeModalFunction, 1500);
+                        } else {
+                            throw new Error('Form submission failed');
+                        }
+                    } catch (error) {
+                        if (formError) formError.style.display = 'block';
+                        if (formSuccess) formSuccess.style.display = 'none';
+                    } finally {
+                        submitButton.disabled = false;
+                    }
+                });
+            }
         }
+    };
+
+    // Initialize modal buttons
+    initModalButtons();
+
+    // Safari compatibility: If the board button wasn't found initially, 
+    // try again after a short delay to ensure the DOM is fully loaded
+    if (!boardApplyButton) {
+        setTimeout(() => {
+            const delayedBoardApplyButton = document.getElementById('board-apply-button');
+            if (delayedBoardApplyButton && modal) {
+                delayedBoardApplyButton.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            }
+        }, 500);
     }
 });
 
