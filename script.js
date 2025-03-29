@@ -134,18 +134,29 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Modal functionality
     const applyButton = document.getElementById('apply-button');
+    const boardApplyButton = document.getElementById('board-apply-button');
     const modal = document.getElementById('apply-modal');
     const closeModal = document.getElementById('close-modal');
     const applicationForm = document.getElementById('application-form');
     const formSuccess = document.querySelector('.form-success');
     const formError = document.querySelector('.form-error');
 
-    if (applyButton && modal && closeModal) {
+    if ((applyButton || boardApplyButton) && modal && closeModal) {
         // Open modal
-        applyButton.addEventListener('click', () => {
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        });
+        if (applyButton) {
+            applyButton.addEventListener('click', () => {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        }
+        
+        // Open modal from board apply button
+        if (boardApplyButton) {
+            boardApplyButton.addEventListener('click', () => {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        }
 
         // Close modal function
         const closeModalFunction = () => {
