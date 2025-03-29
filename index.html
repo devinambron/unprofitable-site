@@ -29,8 +29,8 @@
         </div>
     </div>
 
-    <div class="container mx-auto px-4 py-8 max-w-5xl mt-16">
-        <header class="fixed top-[2.5rem] left-0 w-full bg-black bg-opacity-95 z-45 py-4 backdrop-blur-sm shadow-lg shadow-black/50">
+    <div class="container mx-auto px-4 py-8 max-w-5xl mt-8 md:mt-16">
+        <header class="fixed top-[1.2rem] md:top-[0.5rem] left-0 w-full bg-black bg-opacity-95 z-45 py-4 backdrop-blur-sm shadow-lg shadow-black/50">
             <div class="container mx-auto px-4 max-w-5xl">
                 <nav class="flex justify-between items-center">
                     <div>
@@ -57,7 +57,7 @@
         </header>
         
         <!-- Mobile menu (moved outside header) -->
-        <div class="fixed top-[calc(2.5rem+4rem)] left-0 w-full bg-black z-50 shadow-lg shadow-black/50">
+        <div class="fixed top-[calc(0.5rem+4rem)] md:top-[calc(0.5rem+4rem)] left-0 w-full bg-black z-50 shadow-lg shadow-black/50">
             <div id="mobile-menu" class="hidden lg:hidden border-t border-gray-800 max-w-5xl mx-auto transition-all duration-300 ease-in-out">
                 <ul class="flex flex-col p-4">
                     <li><a href="#mission" class="block py-3 px-2 hover:bg-gray-900 hover:text-white transition-colors rounded">mission</a></li>
@@ -68,9 +68,9 @@
             </div>
         </div>
 
-        <main class="pt-20">
-            <section class="py-20 text-center relative">
-                <div id="trading-chart" class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0" style="min-height: 400px;">
+        <main class="pt-16 md:pt-24">
+            <section class="py-10 md:py-20 text-center relative">
+                <div id="trading-chart" class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0" style="min-height: 300px;">
                     <!-- SVG trading chart will be created by JavaScript -->
                 </div>
                 <div class="relative z-10">
@@ -88,6 +88,40 @@
                     </div>
                 </div>
             </section>
+
+            <!-- Twitter Ticker -->
+            <div class="twitter-ticker-container cursor-pointer">
+                <div class="twitter-ticker">
+                    <div class="ticker-row">
+                        <span class="ticker-item">analysts warned us the market was ripe for growth. we promptly fired them and doubled down on vaporware holdings</span>
+                        <span class="ticker-item">lp's ask us why we have so many analysts. and the answer is simple—we have a hundred analysts to waste time, nothing breaks us away from wagu and espresso martinis</span>
+                        <span class="ticker-item">our financial report includes two domain purchases, a launch pool party, and no revenue</span>
+                        <span class="ticker-item">don't count your losses before they're cashed</span>
+                        <span class="ticker-item">our portfolio strategy: one stock, maximum margin</span>
+                        <span class="ticker-item">just secured negative cash flow for another consecutive quarter</span>
+                        <span class="ticker-item">our analysts recommended diversification, we fired them immediately</span>
+                    </div>
+                    <div class="ticker-row">
+                        <span class="ticker-item">burning runway faster than we can raise it</span>
+                        <span class="ticker-item">due diligence? our strategy is vibes first</span>
+                        <span class="ticker-item">if your deck has more slides than customers, we're interested</span>
+                        <span class="ticker-item">our investment strategy: automate everything except losses</span>
+                        <span class="ticker-item">we're changing our target LP from accredited investors to federally indicted ones</span>
+                        <span class="ticker-item">venture capital is simple: gamble parents' money, lose it immediately, ask for more, repeat</span>
+                        <span class="ticker-item">debt collectors can't hurt you if they can't reach you</span>
+                    </div>
+                    <div class="ticker-row">
+                        <span class="ticker-item">we're looking for founders with a 'big vision' and absolutely no path to profitability. if that's you, dm us</span>
+                        <span class="ticker-item">real estate investing is easy. just buy property in a flood zone and call it 'liquid assets'</span>
+                        <span class="ticker-item">pay yourself last. your landlord and credit card company deserve the real financial freedom</span>
+                        <span class="ticker-item">build passive income by aggressively avoiding all income-generating activities</span>
+                        <span class="ticker-item">always invest in things you don't understand. if the name sounds complicated, it's probably profitable</span>
+                        <span class="ticker-item">take control of your finances by ignoring them completely. budgets are for people who don't believe in miracles</span>
+                        <span class="ticker-item">the key to wealth: spend like you're already rich, and let your future self figure it out</span>
+                        <span class="ticker-item">we only back companies with a product roadmap that consists entirely of vibes and AI buzzwords</span>
+                    </div>
+                </div>
+            </div>
 
             <section class="py-12 mb-8">
                 <div class="border border-red-800 bg-black bg-opacity-80 p-8 rounded-lg relative overflow-hidden">

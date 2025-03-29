@@ -56,6 +56,12 @@ body {
     height: 100%;
   }
 
+  @media (max-width: 768px) {
+    #trading-chart {
+      min-height: 300px;
+    }
+  }
+
   .chart-line {
     fill: none;
     stroke: #ff0000;
@@ -110,6 +116,17 @@ body {
     backdrop-filter: blur(8px);
     border-top: 1px solid #333;
     z-index: 50;
+    position: fixed;
+    top: calc(1rem + 1rem);
+  }
+
+  /* Adjust the top position of the mobile menu */
+  .fixed.top-\[calc\(1rem\+4rem\)\] {
+    top: calc(0.5rem + 2rem); /* Adjusted to be closer to the announcement bar */
+  }
+  
+  .fixed.top-\[calc\(2rem\+4rem\)\] {
+    top: calc(0.5rem + 2rem); /* Adjusted to be closer to the announcement bar */
   }
 
   /* Mobile menu button styles */
@@ -138,6 +155,7 @@ body {
     background-color: rgba(0, 0, 0, 0.95);
     backdrop-filter: blur(8px);
     z-index: 45;
+    margin-top: 0.5rem; /* Reduced from 1.5rem to bring it closer to the announcement bar */
   }
 
   /* Announcement bar styles */
@@ -300,4 +318,178 @@ body {
     padding: 0.75rem;
     background-color: rgba(255, 0, 0, 0.1);
     border: 1px solid #ff0000;
+  }
+
+  /* Twitter ticker styles */
+  .twitter-ticker-container {
+    position: relative;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    background-color: #111;
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
+    overflow: hidden;
+    padding: 0.75rem 0;
+    margin-top: -2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease;
+    height: 7.5rem;
+  }
+
+  .twitter-ticker-container:hover {
+    background-color: #1a1a1a;
+  }
+
+  .twitter-ticker-container::before,
+  .twitter-ticker-container::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 15%;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .twitter-ticker-container::before {
+    left: 0;
+    background: linear-gradient(to right, #111 30%, rgba(17, 17, 17, 0));
+  }
+
+  .twitter-ticker-container::after {
+    right: 0;
+    background: linear-gradient(to left, #111 30%, rgba(17, 17, 17, 0));
+  }
+
+  .twitter-ticker-container:hover::before {
+    background: linear-gradient(to right, #1a1a1a 30%, rgba(26, 26, 26, 0));
+  }
+
+  .twitter-ticker-container:hover::after {
+    background: linear-gradient(to left, #1a1a1a 30%, rgba(26, 26, 26, 0));
+  }
+
+  .twitter-ticker {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+  }
+
+  .ticker-row {
+    display: flex;
+    white-space: nowrap;
+    animation: ticker-scroll 20s linear infinite;
+    height: 2.5rem;
+  }
+
+  .ticker-row:nth-child(2) {
+    animation-delay: -6.66s;
+    animation-duration: 25s;
+  }
+
+  .ticker-row:nth-child(3) {
+    animation-delay: -13.33s;
+    animation-duration: 22s;
+  }
+
+  .twitter-ticker:hover .ticker-row {
+    animation-play-state: paused;
+  }
+
+  .ticker-item {
+    display: inline-block;
+    padding: 0 0 0 1.5rem;
+    color: #aaa;
+    transition: color 0.3s ease;
+    font-size: 0.9rem;
+    line-height: 2.5;
+  }
+
+  .twitter-ticker:hover .ticker-item {
+    color: #fff;
+  }
+
+  .ticker-item::after {
+    content: "•";
+    display: inline-block;
+    margin-left: 1.5rem;
+    color: #ff0000;
+  }
+
+  .ticker-item:last-child::after {
+    display: none;
+  }
+
+  @keyframes ticker-scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .twitter-ticker-container {
+      height: 8rem;
+      padding: 1rem 0;
+    }
+    
+    .ticker-row {
+      height: 2.6667rem;
+    }
+    
+    .ticker-item {
+      line-height: 2.6667;
+      font-size: 0.95rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .twitter-ticker-container {
+      height: 5.5rem;
+      padding: 0.5rem 0;
+      margin-top: -1.5rem;
+    }
+    
+    .ticker-row {
+      animation-duration: 15s;
+      height: 1.85rem;
+    }
+    
+    .ticker-row:nth-child(2) {
+      animation-duration: 18s;
+    }
+    
+    .ticker-row:nth-child(3) {
+      animation-duration: 16s;
+    }
+    
+    .twitter-ticker-container::before,
+    .twitter-ticker-container::after {
+      width: 20%;
+    }
+    
+    .twitter-ticker-container::before {
+      background: linear-gradient(to right, #111 40%, rgba(17, 17, 17, 0));
+    }
+    
+    .twitter-ticker-container::after {
+      background: linear-gradient(to left, #111 40%, rgba(17, 17, 17, 0));
+    }
+    
+    .ticker-item {
+      font-size: 0.8rem;
+      padding: 0 0 0 1rem;
+      line-height: 1.85;
+    }
+    
+    .ticker-item::after {
+      margin-left: 1rem;
+    }
   }

@@ -236,7 +236,47 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }, 500);
     }
+    
+    // Initialize Twitter ticker functionality
+    initTwitterTicker();
 });
+
+// Function to initialize the Twitter ticker
+function initTwitterTicker() {
+    const ticker = document.querySelector('.twitter-ticker');
+    if (!ticker) return;
+    
+    // Get all rows
+    const tickerRows = ticker.querySelectorAll('.ticker-row');
+    
+    // For each row, clone the content for seamless looping
+    tickerRows.forEach(row => {
+        const rowContent = row.innerHTML;
+        row.innerHTML = rowContent + rowContent;
+    });
+    
+    // Make ticker clickable to go to Twitter profile
+    ticker.addEventListener('click', () => {
+        window.open('https://x.com/unprofitablevc', '_blank');
+    });
+    
+    // Adjust animation duration for each row based on content length 
+    tickerRows.forEach((row, index) => {
+        const tickerItems = row.querySelectorAll('.ticker-item');
+        const contentLength = tickerItems.length;
+        
+        // Base duration varies by row for visual interest
+        const baseDuration = 10 + (index * 5); // More pronounced speed differences between rows
+        const dynamicDuration = baseDuration + (contentLength * 0.15);
+        
+        // Apply the dynamic duration
+        row.style.animationDuration = `${dynamicDuration}s`;
+        
+        // Set different delay for each row to ensure they don't sync up
+        const delay = -(dynamicDuration / 5) * index;
+        row.style.animationDelay = `${delay}s`;
+    });
+}
 
 // Function to create and animate the trading chart
 function createTradingChart() {
@@ -251,7 +291,8 @@ function createTradingChart() {
     
     // Force a minimum height if container has zero height
     if (chartContainer.clientHeight < 200) {
-        chartContainer.style.height = '400px';
+        const isMobile = window.innerWidth <= 768;
+        chartContainer.style.height = isMobile ? '300px' : '400px';
     }
     
     const containerWidth = chartContainer.clientWidth || window.innerWidth;
