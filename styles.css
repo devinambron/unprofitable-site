@@ -157,6 +157,18 @@ body {
     text-align: center;
   }
 
+  /* Media query for smaller screens */
+  @media (max-width: 640px) {
+    .announcement-bar {
+      font-size: 0.55rem;
+      padding: 0.4rem 0;
+    }
+    
+    .announcement-content {
+      padding: 0 0.5rem;
+    }
+  }
+
   .announcement-link {
     background: none;
     border: none;
